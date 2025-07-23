@@ -5,21 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Top News Daily</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <div class="container">
+    <header>
+      <h1>Top News Daily</h1>
+      <p class="subtitle">A minimalist, AI-powered feed of the world’s top headlines.</p>
+    </header>
 
-  <header>
-    <h1>🌍 Top News Daily</h1>
-    <p>10 global headlines updated live — no fluff, just facts.</p>
-  </header>
+    <main id="news-container">
+      <p>Loading latest news...</p>
+    </main>
 
-  <main id="news-container">
-    <p>Loading latest news...</p>
-  </main>
-
-  <footer>
-    <p>Built by Pedro Esteves 🧠 | Auto-updated news powered by API</p>
-  </footer>
+    <footer>
+      <p>Built by Pedro Esteves 🧠 – auto-updated with live API</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
