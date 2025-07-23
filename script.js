@@ -11,26 +11,44 @@ function fetchNews(lang = "en") {
   fetch(apiUrl)
   .then(res => res.json())
   .then(data => {
-    container.innerHTML = ""; // Clear loading text
-    data.articles.forEach(article => {
-      const div = document.createElement("div");
-      div.className = "article";
+container.innerHTML = ""; // Clear loading text
+data.articles.forEach(article => {
+  const div = document.createElement("div");
+  div.className = "article";
 
-      div.innerHTML = `
-        <img src="${article.image}" alt="News image" class="thumbnail" />
-        <div class="text-block">
-          <h2>${article.title}</h2>
-          <p><a href="${article.url}" target="_blank">Read more</a></p>
-        </div>
-      `;
+  div.innerHTML = `
+    <img src="${article.image}" alt="News image" class="thumbnail" />
+    <div class="text-block">
+      <h2>${article.title}</h2>
+      <button class="preview-btn" data-url="${article.url}">Read more</button>
+    </div>
+  `;
 
-      container.appendChild(div);
-    });
-  })
-  .catch(error => {
-    container.innerHTML = "<p>Sorry, we couldn’t load the news. Try again later.</p>";
-    console.error("Error loading news:", error);
-  });
+  container.appendChild(div);
+});
+
+// Event delegation for preview
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("preview-btn")) {
+    const url = e.target.getAttribute("data-url");
+    openPreview(url);
+  }
+});
+
+// Preview function
+function openPreview(url) {
+  const overlay = document.createElement("div");
+  overlay.className = "preview-overlay";
+  overlay.innerHTML = `
+    <div class="preview-box">
+      <iframe src="${url}" frameborder="0"></iframe>
+      <button class="close-preview">×</button>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  document.querySelector(".close-preview").onclick = () => overlay.remove();
+}
 
 // Load news on start
 fetchNews("en");
