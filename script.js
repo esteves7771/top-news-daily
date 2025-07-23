@@ -1,4 +1,4 @@
-const apiKey = "1e5b90cae5693516034037a9aef9da6a";
+const apiKey = "1e5b90cae5693516034037a9aef9da6a"; // Your valid API key
 const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&token=${apiKey}`;
 
 const container = document.getElementById("news-container");
@@ -21,4 +21,9 @@ fetch(apiUrl)
     container.innerHTML = "<p>Sorry, we couldn’t load the news. Try again later.</p>";
     console.error("Error loading news:", error);
   });
+
+// Dark mode toggle
+document.getElementById("toggle-theme").addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+});
 
