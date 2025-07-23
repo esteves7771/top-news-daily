@@ -50,8 +50,14 @@ main {
 }
 
 .article a {
-  color: #0066cc;
+  display: inline-block;
+  background-color: #471869; /* Deep purple */
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
   text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
 }
 
 .article a:hover {
