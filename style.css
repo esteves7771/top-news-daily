@@ -54,8 +54,11 @@ main {
   padding: 0 20px;
 }
 
-/* Article styling */
+/* Article styling with thumbnail layout */
 .article {
+  display: flex;
+  align-items: center;
+  gap: 15px;
   background: #fff;
   border-radius: 8px;
   padding: 15px;
@@ -63,11 +66,26 @@ main {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
+/* Thumbnail image */
+.article img.thumbnail {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Text block next to thumbnail */
+.text-block {
+  flex: 1;
+}
+
+/* Headline */
 .article h2 {
   font-size: 18px;
   margin-bottom: 10px;
 }
 
+/* Link button style */
 .article a {
   display: inline-block;
   background-color: #471869;
@@ -109,5 +127,6 @@ body.dark-mode .article a {
 body.dark-mode .article a:hover {
   background-color: #bba2ea;
 }
+
 
 
