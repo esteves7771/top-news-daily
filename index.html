@@ -55,7 +55,12 @@
       margin: 10px 0;
     }
 
-    /* Toggle Switch */
+    .left-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .switch {
       position: relative;
       display: inline-block;
@@ -220,17 +225,19 @@
         <h1 id="title">Top News Daily</h1>
       </div>
     </div>
-    <label class="switch">
-      <input type="checkbox" id="toggle-theme">
-      <span class="slider"></span>
-    </label>
-    <select id="language-selector" title="Choose Language">
-      <option value="en">🇺🇸 English</option>
-      <option value="es">🇪🇸 Spanish</option>
-      <option value="pt">🇵🇹 Portuguese</option>
-      <option value="fr">🇫🇷 French</option>
-      <option value="de">🇩🇪 German</option>
-    </select>
+    <div class="left-controls">
+      <label class="switch">
+        <input type="checkbox" id="toggle-theme">
+        <span class="slider"></span>
+      </label>
+      <select id="language-selector" title="Choose Language">
+        <option value="en">🇺🇸 English</option>
+        <option value="es">🇪🇸 Spanish</option>
+        <option value="pt">🇵🇹 Portuguese</option>
+        <option value="fr">🇫🇷 French</option>
+        <option value="de">🇩🇪 German</option>
+      </select>
+    </div>
     <p id="subtitle">Your daily global news clean, quick, and curated.</p>
     <nav>
       <a href="#news" id="nav-news">📰 News</a>
@@ -280,5 +287,6 @@
   </script>
 </body>
 </html>
+
 
 
