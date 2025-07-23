@@ -22,8 +22,12 @@ fetch(apiUrl)
     console.error("Error loading news:", error);
   });
 
-// Dark mode toggle
-document.getElementById("toggle-theme").addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
+// Enable dark mode toggle
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.getElementById("toggle-theme");
+  toggleButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+  });
 });
+
 
