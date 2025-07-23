@@ -1,4 +1,4 @@
-const apiKey = "9e4b708cfff3f74b93ac92643641d192"; // 🔐 Replace with your real API key
+const apiKey = "1e5b90cae5693516034037a9aef9da6a";
 const apiUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=10&token=${apiKey}`;
 
 const container = document.getElementById("news-container");
