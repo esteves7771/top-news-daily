@@ -86,3 +86,31 @@ footer {
   cursor: pointer;
 }
 
+/* Link button style (default light mode) */
+.article a {
+  display: inline-block;
+  background-color: #471869; /* Deep purple */
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.article a:hover {
+  background-color: #683397; /* Slightly lighter on hover */
+}
+
+/* Dark mode link style */
+body.dark-mode .article a {
+  background-color: #d4c2f0; /* Light purple for contrast */
+  color: #1a1a1a; /* Dark text on light background */
+}
+
+body.dark-mode .article a:hover {
+  background-color: #bba2ea;
+}
+
+
