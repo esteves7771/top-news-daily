@@ -9,24 +9,28 @@ function fetchNews(lang = "en") {
   container.innerHTML = "<p>Loading latest news...</p>";
 
   fetch(apiUrl)
-    .then(res => res.json())
-    .then(data => {
-      container.innerHTML = ""; // Clear loading text
-      data.articles.forEach(article => {
-        const div = document.createElement("div");
-        div.className = "article";
-        div.innerHTML = `
+  .then(res => res.json())
+  .then(data => {
+    container.innerHTML = ""; // Clear loading text
+    data.articles.forEach(article => {
+      const div = document.createElement("div");
+      div.className = "article";
+
+      div.innerHTML = `
+        <img src="${article.image}" alt="News image" class="thumbnail" />
+        <div class="text-block">
           <h2>${article.title}</h2>
           <p><a href="${article.url}" target="_blank">Read more</a></p>
-        `;
-        container.appendChild(div);
-      });
-    })
-    .catch(error => {
-      container.innerHTML = "<p>Sorry, we couldn’t load the news. Try again later.</p>";
-      console.error("Error loading news:", error);
+        </div>
+      `;
+
+      container.appendChild(div);
     });
-}
+  })
+  .catch(error => {
+    container.innerHTML = "<p>Sorry, we couldn’t load the news. Try again later.</p>";
+    console.error("Error loading news:", error);
+  });
 
 // Load news on start
 fetchNews("en");
