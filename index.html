@@ -156,38 +156,80 @@
       <option value="fr">🇫🇷 French</option>
       <option value="de">🇩🇪 German</option>
     </select>
-    <h1>🌍 Top News Daily</h1>
-    <p>Your daily global news clean, quick, and curated.</p>
+    <h1 id="title">🌍 Top News Daily</h1>
+    <p id="subtitle">Your daily global news clean, quick, and curated.</p>
     <nav>
-      <a href="#news">📰 News</a>
-      <a href="#weather">🌤 Weather</a>
-      <a href="#about">📬 About & Contact</a>
+      <a href="#news" id="nav-news">📰 News</a>
+      <a href="#weather" id="nav-weather">🌤 Weather</a>
+      <a href="#about" id="nav-about">📬 About & Contact</a>
     </nav>
   </header>
 
   <section id="news">
-    <h2>Top Headlines</h2>
+    <h2 id="headline-title">Top Headlines</h2>
     <div id="news-container">
       <p>Loading latest news...</p>
     </div>
   </section>
 
   <section id="weather">
-    <h2>Weather</h2>
+    <h2 id="weather-title">Weather</h2>
     <p id="weather-info">Loading weather...</p>
   </section>
 
   <section id="about">
-    <h2>About & Contact</h2>
-    <p>This project was built by Pedro Esteves 🧠 to showcase live API integration and UI development.</p>
-    <p>Contact: <a href="mailto:pedro@example.com">pedro@example.com</a></p>
+    <h2 id="about-title">About & Contact</h2>
+    <p id="about-desc">This project was built by Pedro Esteves 🧠 to showcase live API integration and UI development.</p>
+    <p id="contact-line">Contact: <a href="mailto:pedro@example.com">pedro@example.com</a></p>
   </section>
 
   <footer>
-    <p>Built by Pedro Esteves 🧠 | Auto-updated news powered by API</p>
+    <p id="footer-line">Built by Pedro Esteves 🧠 | Auto-updated news powered by API</p>
   </footer>
 
   <script>
+    const translations = {
+      en: {
+        subtitle: "Your daily global news clean, quick, and curated.",
+        navNews: "📰 News",
+        navWeather: "🌤 Weather",
+        navAbout: "📬 About & Contact",
+        headlineTitle: "Top Headlines",
+        weatherTitle: "Weather",
+        aboutTitle: "About & Contact",
+        aboutDesc: "This project was built by Pedro Esteves 🧠 to showcase live API integration and UI development.",
+        contactLine: "Contact: pedro@example.com",
+        footerLine: "Built by Pedro Esteves 🧠 | Auto-updated news powered by API"
+      },
+      es: {
+        subtitle: "Tu resumen global diario: claro, rápido y curado.",
+        navNews: "📰 Noticias",
+        navWeather: "🌤 Clima",
+        navAbout: "📬 Acerca de & Contacto",
+        headlineTitle: "Titulares principales",
+        weatherTitle: "Clima",
+        aboutTitle: "Acerca de & Contacto",
+        aboutDesc: "Este proyecto fue creado por Pedro Esteves 🧠 para mostrar integración con API y desarrollo de UI.",
+        contactLine: "Contacto: pedro@example.com",
+        footerLine: "Desarrollado por Pedro Esteves 🧠 | Noticias en vivo desde API"
+      }
+      // Additional languages can be added here
+    };
+
+    const updateText = (lang) => {
+      const t = translations[lang] || translations.en;
+      document.getElementById("subtitle").textContent = t.subtitle;
+      document.getElementById("nav-news").textContent = t.navNews;
+      document.getElementById("nav-weather").textContent = t.navWeather;
+      document.getElementById("nav-about").textContent = t.navAbout;
+      document.getElementById("headline-title").textContent = t.headlineTitle;
+      document.getElementById("weather-title").textContent = t.weatherTitle;
+      document.getElementById("about-title").textContent = t.aboutTitle;
+      document.getElementById("about-desc").textContent = t.aboutDesc;
+      document.getElementById("contact-line").textContent = t.contactLine;
+      document.getElementById("footer-line").textContent = t.footerLine;
+    };
+
     const newsApiKey = "1e5b90cae5693516034037a9aef9da6a";
     const weatherApiKey = "916b9b70c24345dbafc174248252307";
 
@@ -229,47 +271,39 @@
         return;
       }
 
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { latitude, longitude } = pos.coords;
-        const url = `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${latitude},${longitude}`;
+      navigator.geolocation.getCurrentPosition(position => {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${lat},${lon}`;
 
-        fetch(url)
+        fetch(apiUrl)
           .then(res => res.json())
           .then(data => {
-            const weather = data.current;
-            weatherInfo.innerHTML = `
-              <p><strong>${data.location.name}, ${data.location.country}</strong></p>
-              <p>${weather.condition.text}, ${weather.temp_c}°C</p>
-              <img src="${weather.condition.icon}" alt="Weather Icon" />
-            `;
+            weatherInfo.textContent = `${data.location.name}, ${data.location.country}: ${data.current.temp_c}°C, ${data.current.condition.text}`;
           })
           .catch(() => {
-            weatherInfo.textContent = "Unable to fetch weather data.";
+            weatherInfo.textContent = "Failed to load weather data.";
           });
-      }, (err) => {
-        if (err.code === 1) {
-          weatherInfo.textContent = "Location permission denied. Please enable location to view weather.";
-        } else {
-          weatherInfo.textContent = "Unable to retrieve your location.";
-        }
+      }, () => {
+        weatherInfo.textContent = "Unable to retrieve your location.";
       });
     }
 
     languageSelector.addEventListener("change", () => {
-      fetchNews(languageSelector.value);
+      const lang = languageSelector.value;
+      fetchNews(lang);
+      updateText(lang);
     });
 
     toggleButton.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
     });
 
-    fetchNews();
+    const defaultLang = languageSelector.value;
+    fetchNews(defaultLang);
     fetchWeather();
+    updateText(defaultLang);
   </script>
 </body>
 </html>
 
-
-  <script src="script.js"></script>
-</body>
-</html>
